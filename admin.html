@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="en">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#f5f3ee"><title>Admin — Sandun Madhura</title><link rel="preconnect" href="https://fonts.googleapis.com"><link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet"><link rel="stylesheet" href="styles.css"><link rel="stylesheet" href="admin.css"></head>
+<body class="admin-body">
+<header class="admin-header"><a class="brand" href="index.html"><span class="brand-mark">SM.</span><span>Sandun Madhura <span class="admin-tag">STUDIO ADMIN</span></span></a><a class="text-link" href="index.html">← View portfolio</a></header>
+<main class="admin-main">
+  <div class="admin-intro"><div><div class="eyebrow">WORKSPACE / PROJECT MANAGER</div><h1>Manage your<br><span class="serif">creative work.</span></h1></div><div class="local-notice"><strong>Starter dashboard</strong><p>This demo saves projects in this browser only. It's not secure or shared with public visitors. Connect a backend before production use.</p></div></div>
+  <div class="admin-tabs"><button class="tab active" data-tab="projects">Projects</button><button class="tab" data-tab="profile">Profile & links</button></div>
+  <section class="admin-panel" id="projects-panel">
+    <div class="panel-heading"><div><h2>Your projects</h2><p>Add and organize portfolio work.</p></div><button class="admin-button" id="new-project">＋ Add project</button></div>
+    <form class="project-form" id="project-form" hidden>
+      <div class="form-heading"><h3 id="form-title">New project</h3><button type="button" class="close-form" id="cancel-form" aria-label="Close form">×</button></div>
+      <input type="hidden" id="project-id">
+      <div class="form-grid">
+        <label>Project title<input id="title" required maxlength="90" placeholder="e.g. Summer Campaign"></label>
+        <label>Category<select id="category" required><option>Social Media</option><option>Flyers</option><option>Packaging</option><option>Video Ads</option><option>Web Design</option></select></label>
+        <label>Short description<input id="description" maxlength="140" placeholder="Campaign · Visual design"></label>
+        <label>Year<input id="year" maxlength="4" placeholder="2026"></label>
+        <label class="full-field">Image or video file<input id="media-file" type="file" accept="image/*,video/mp4,video/webm,video/ogg"><small>For this local demo only. Large files may exceed browser storage limits. Use hosted image/video URLs for a production site.</small></label>
+        <label class="full-field">Or media URL<input id="media-url" type="url" placeholder="https://…"></label>
+      </div>
+      <div class="form-actions"><button type="button" class="admin-button secondary" id="reset-form">Clear</button><button type="submit" class="admin-button">Save project ↗</button></div>
+      <p class="form-message" id="form-message" role="status"></p>
+    </form>
+    <div class="admin-project-list" id="admin-project-list"></div>
+  </section>
+  <section class="admin-panel" id="profile-panel" hidden>
+    <div class="panel-heading"><div><h2>Profile & links</h2><p>Update the contact links shown on your portfolio.</p></div></div>
+    <form id="profile-form" class="profile-form">
+      <label>Email address<input id="profile-email" type="email" placeholder="you@example.com"></label>
+      <label>WhatsApp number<input id="profile-whatsapp" placeholder="94771234567"><small>Include country code, numbers only recommended.</small></label>
+      <label>Instagram profile URL<input id="profile-instagram" type="url" placeholder="https://instagram.com/yourprofile"></label>
+      <label>Behance profile URL<input id="profile-behance" type="url" placeholder="https://behance.net/yourprofile"></label>
+      <button class="admin-button" type="submit">Save profile links ↗</button><p class="form-message" id="profile-message" role="status"></p>
+    </form>
+  </section>
+  <div class="admin-footer"><span>SM. / CREATIVE PORTFOLIO</span><span>Starter build · HTML / CSS / JS</span></div>
+</main>
+<script src="admin.js"></script>
+</body></html>
