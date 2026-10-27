@@ -1,47 +1,29 @@
-# Sandun Madhura — Creative Portfolio
+# Sandun Madhura Portfolio — Supabase version
 
-A responsive minimal/premium portfolio starter built with plain HTML, CSS and JavaScript.
+Static HTML/CSS/JS portfolio with Supabase Storage + database for shared uploads and Supabase Auth for the admin dashboard.
 
-## Included
-- Portfolio homepage with selected work, services, about and contact sections
-- Category filters: Social Media, Flyers, Packaging, Video Ads and Web Design
-- Click-to-open project previews
-- Admin starter dashboard (`admin.html`) to add/edit/delete projects
-- Profile links form for email, WhatsApp, Instagram and Behance
-- Responsive layout for desktop and mobile
+## Setup (required before deploy)
 
-## Run locally
-1. Extract the ZIP.
-2. Open `index.html` in a browser, or use VS Code's Live Server extension.
-3. Open `admin.html` to manage sample projects.
+1. Create a project at https://supabase.com.
+2. In Supabase **Project Settings → API**, copy the **Project URL** and **anon/public key**.
+3. Edit `config.js` and replace:
+   - `PASTE_SUPABASE_PROJECT_URL_HERE`
+   - `PASTE_SUPABASE_ANON_KEY_HERE`
+   - `YOUR_ADMIN_EMAIL_HERE` with your admin login email.
+   The anon/public key is designed for browser use. **Never put a service-role/secret key in this file.**
+4. Open Supabase **SQL Editor → New query**. Open `supabase-setup.sql`, replace every `YOUR_ADMIN_EMAIL_HERE` with the exact same admin email, and run the SQL.
+5. In Supabase **Authentication → Users**, create an admin user using that email and a strong password. Use the same email/password on `admin.html` to sign in. Keep public sign-ups disabled; create the admin user yourself.
+6. Upload all project files (including `config.js`, `supabase.js`, and `supabase-setup.sql`) to the root of your GitHub repository and deploy to Vercel. Do not upload any service-role key.
+7. Open `admin.html`, sign in, and upload a test image. It should then appear on the public portfolio for all visitors.
 
-## Important limitations of this starter
-The admin dashboard uses `localStorage`. This is a prototype only:
-- Changes are saved only in the current browser and device.
-- Public visitors will not see projects added from your browser.
-- There is no real authentication. Do not treat the admin page as secure.
-- Local file uploads are limited to small files because browser storage is limited.
-- Sample projects are placeholders and should be replaced with your real work.
+## What changed
+- Admin media uploads go to the `portfolio-media` Supabase Storage bucket.
+- Project metadata and profile links are stored in Supabase tables.
+- Public visitors can read portfolio projects/media; only the configured admin email can insert, edit, or delete data.
+- Media file limit is configured to 50 MB in this starter. Consider compressing large videos for performance.
+- When replacing or deleting a project's media, the old storage object is cleaned up where possible.
 
-## Production upgrade for shared uploads
-For a public portfolio where admin uploads are visible to every visitor:
-1. Create a Supabase project.
-2. Use Supabase Auth for admin sign-in (restrict access to your own account).
-3. Create a `projects` table with fields such as `id`, `title`, `category`, `description`, `year`, `media_url`, `media_type`, `created_at`.
-4. Create a Supabase Storage bucket for portfolio media.
-5. Configure Row Level Security so public visitors can read published projects but only your authenticated admin can create, update and delete them.
-6. Move the admin form and public gallery to use Supabase instead of `localStorage`.
-Never put a Supabase service-role key in browser JavaScript.
-
-## Deploy to Vercel
-1. Create a GitHub repository and upload the extracted project files to the repository root.
-2. Sign in to Vercel and choose **Add New → Project**.
-3. Import the GitHub repository.
-4. For a plain static site, use no build command and no framework preset if Vercel asks; the root directory should contain `index.html`.
-5. Deploy. Vercel will provide a `*.vercel.app` URL.
-6. After making changes, push them to GitHub and Vercel will redeploy automatically.
-
-## Before launch
-- Replace `hello@example.com` and social links with your real contact details in the admin profile form.
-- Replace the sample project placeholders with your actual portfolio images.
-- Add a real backend and secure authentication before exposing project management publicly.
+## Important
+- Supabase Free plans have quotas and may change. Check your dashboard for current storage/bandwidth limits.
+- If you previously added projects using the old localStorage dashboard, those are not automatically migrated. Re-upload them through the new admin dashboard.
+- This browser-only static site uses Supabase Auth + RLS; do not ever expose a service-role key.
